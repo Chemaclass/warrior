@@ -15,6 +15,7 @@ import success.Ftp;
 import utils.Global;
 import static utils.Global.pOut;
 import static utils.Global.pOutE;
+import static utils.Global.pSuccess;
 import warrior.MemberSuccess;
 import warrior.Warrior;
 
@@ -197,15 +198,15 @@ public class Home {
                                 String value2 = entry2.getValue();
                                 String s;
                                 if ("".equals(valueBuffer)) {
-                                    System.out.println(Str.success + key + "." + key2 + ":: " + value2);
+                                    pSuccess(key + "." + key2 + ":: " + value2);
                                     System.out.println(ms.getHelps(key2));
                                 } else if ((s = Help.getHelp(key2, valueBuffer)) != null) {
-                                    System.out.println(Str.success + key + "." + key2 + "." + valueBuffer
+                                    pSuccess(key + "." + key2 + "." + valueBuffer
                                             + ": " + s + "\n");
                                 }
                             } //else
                             else {
-                                System.out.println(Str.success + key + "." + key2 + ":" + valueBuffer);
+                                pSuccess(key + "." + key2 + ":" + valueBuffer);
                                 //shape=modelar/dar forma
                                 shapeMembers(ms, key, key2, valueBuffer);
                             }

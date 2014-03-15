@@ -24,7 +24,7 @@ public class Global {
     public static void pOut(String out) {
         System.out.println(Str.out + out);
     }
-    
+
     /**
      * Imprime una salida de error por consola con el prompt out
      *
@@ -41,5 +41,14 @@ public class Global {
      */
     public static void pIn(String in) {
         System.out.println(Str.in + in);
+    }
+
+    /**
+     * Imprime una salida por consola con el prompt success
+     *
+     * @param txt String
+     */
+    public static void pSuccess(String txt) {
+        System.out.println(Str.success + txt);
     }
 }
