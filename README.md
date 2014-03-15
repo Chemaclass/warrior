@@ -16,5 +16,5 @@ para mejorarlo y actualizarlo. Tengo que refactorizar y mejorar toda su funciona
 y lo hiré haciendo conforme vaya sacando tiempo. 
 
 Espero pronto desarrollar una buena documentación en JavaDoc, y publicar 
-el diagrama de clases que permita entender el proyecto en su totalidad de
+el diagrama de clases que permita entender el proyecto en su totalidad de 
 la forma más simple posible.
