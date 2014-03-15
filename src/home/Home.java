@@ -1,7 +1,6 @@
 package home;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -39,7 +38,7 @@ public class Home {
      * Converts the collection to a list to cross it
      */
     public Home() {
-        HashMap<String, Map<String, String>> members = new HashMap<String, Map<String, String>>();
+        HashMap<String, Map<String, String>> members = new HashMap<>();
         ms = new MemberSuccess();
 
         init(members);
@@ -133,12 +132,11 @@ public class Home {
                 //
                 ms = loadBuffer(ms, buffer);
                 if (ms.getFtp() != null || ms.getCore() != null) {
-                    new Warrior(ms).run();
+                    new Warrior(ms).start();
                 }
 
-            } catch (Exception ex) {
+            } catch (IOException ex) {
                 System.out.println(Str.out + "Exception:" + ex.getMessage());
-                ex.printStackTrace();
             }
         }
         System.out.println(Str.out + "Bye!");
@@ -151,12 +149,11 @@ public class Home {
      * @return
      */
     private static MemberSuccess loadBuffer(MemberSuccess ms, String[] buffer) {
-        // We decompose the buffer
+        OUTER:
         for (String kBuffer : buffer) {
             int first = (kBuffer.contains(".") ? kBuffer.indexOf(".") : kBuffer.length());
             int second = (kBuffer.contains(":") ? kBuffer.indexOf(":") : kBuffer.length());
-
-            String keyBuffer = kBuffer.substring(0, first);// ej: core.
+            String keyBuffer = kBuffer.substring(0, first);
             String key2Buffer = "", valueBuffer = "";
             if (first != kBuffer.length()) {
                 key2Buffer = kBuffer.substring(first + 1, second);// ej: core.name:
@@ -164,30 +161,23 @@ public class Home {
                     valueBuffer = kBuffer.substring(second + 1);// ej: core.name:nombre	
                 }
             }
-
-            // Show all the help of values ​​of the members
             if (keyBuffer.equals(Str.help) && key2Buffer.length() == 0) {
                 System.out.println(ms.getHelps(Str.all));
                 break;
             }
-
-            // Check the short commands ej: 
-            //-n(name) -p(path) -r(remove) -c(search) -s(see) -d(send) -w(write)
             String strCheck = checks(keyBuffer);
-
-            if (strCheck.equals(Str._continue)) {
-                continue;
-            } else if (strCheck.equals(Str._break)) {
-                break;
+            switch (strCheck) {
+                case Str._continue:
+                    continue;
+                case Str._break:
+                    break OUTER;
             }
-
-            // We go through every member
             for (Entry<String, Map<String, String>> entry : membersList) {
 
                 String key = entry.getKey();
 
                 // Compare keys
-                if (key.equals(keyBuffer)) { // (help|core|ftp) ej: core == help (F), core == core (T) 
+                if (key.equals(keyBuffer)) { // (help|core|ftp) ej: core == help (F), core == core (T)
 
                     // Etracts the resulting map with that key
                     Map<String, String> value = entry.getValue();
@@ -204,8 +194,8 @@ public class Home {
                             //help
                             if (key.equals(Str.help)) {
                                 String value2 = entry2.getValue();
-                                String s = "";
-                                if (valueBuffer == "") {
+                                String s;
+                                if ("".equals(valueBuffer)) {
                                     System.out.println(Str.success + key + "." + key2 + ":: " + value2);
                                     System.out.println(ms.getHelps(key2));
                                 } else if ((s = Help.getHelp(key2, valueBuffer)) != null) {
@@ -308,16 +298,16 @@ public class Home {
         if (isCoreNull || c == null) {
             ms.setCore(null);
         }
-
         // Clean all values ​​of the members
-        if (keyBuffer.equals(Str.clean)) {
-            ms = new MemberSuccess();
-            home = new Home();
-            return Str._break;
-        } // Show all the values ​​of the members
-        else if (keyBuffer.equals(Str.show)) {
-            System.out.println((ms != null) ? ms.toString() : Str.empty);
-            //return Str._continue;
+        switch (keyBuffer) {
+            case Str.clean:
+                ms = new MemberSuccess();
+                home = new Home();
+                return Str._break;
+            case Str.show:
+                System.out.println((ms != null) ? ms.toString() : Str.empty);
+                //return Str._continue;
+                break;
         }
 
         // Check the short commands		
