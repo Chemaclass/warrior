@@ -2,8 +2,8 @@ package home;
 
 public class Quit {
 
-	public Quit() {
-		
-	}
+    public Quit() {
+
+    }
 
 }
