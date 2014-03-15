@@ -63,7 +63,7 @@ public class Core {
         return s;
     }
 
-    private static Map<String, String> help = new HashMap<String, String>();
+    private static final Map<String, String> help = new HashMap<>();
 
     static {
         //help.put(Str.find,"("+Str.chars+")" 	+  Str.h_find);

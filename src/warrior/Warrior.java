@@ -7,7 +7,7 @@ import warrior.ftp.WFtp;
 
 public class Warrior extends Thread {
 
-    private MemberSuccess member;
+    private final MemberSuccess member;
 
     public Warrior(MemberSuccess member) {
         this.member = member;

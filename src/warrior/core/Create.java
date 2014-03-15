@@ -8,7 +8,7 @@ public class Create {
 
     private int nDir = 0;
     private int nFil = 0;
-    private String search;
+    private final String search;
     private String remove = "";
 
     //private static Create create=null;
