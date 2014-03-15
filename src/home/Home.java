@@ -14,6 +14,7 @@ import success.Core;
 import success.Ftp;
 import utils.Global;
 import static utils.Global.pOut;
+import static utils.Global.pOutE;
 import warrior.MemberSuccess;
 import warrior.Warrior;
 
@@ -59,13 +60,12 @@ public class Home {
      */
     private void init(Map<String, Map<String, String>> members) {
 
+        //Help
         members.put(Str.help, new HashMap<String, String>());
-
-        //
         members.get(Str.help).put(Str.clean, Str.h_clean);
         members.get(Str.help).put(Str.show, Str.h_show);
         members.get(Str.help).put(Str.help, Str.h_help);
-		//
+	//
         //members.get(Str.help).put(Str._,Str.clean_all);
 
         //FTP 
@@ -137,7 +137,7 @@ public class Home {
                 }
 
             } catch (IOException ex) {
-               pOut("Exception:" + ex.getMessage());
+                pOutE("Exception:" + ex.getMessage());
             }
         }
         pOut("Bye!");

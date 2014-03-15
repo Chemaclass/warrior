@@ -24,6 +24,15 @@ public class Global {
     public static void pOut(String out) {
         System.out.println(Str.out + out);
     }
+    
+    /**
+     * Imprime una salida de error por consola con el prompt out
+     *
+     * @param out String
+     */
+    public static void pOutE(String out) {
+        System.err.println(Str.out + out);
+    }
 
     /**
      * Imprime una salida por consola con el prompt in
