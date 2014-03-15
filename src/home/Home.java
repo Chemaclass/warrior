@@ -12,7 +12,8 @@ import java.util.StringTokenizer;
 import member.Help;
 import success.Core;
 import success.Ftp;
-import utils.Utils;
+import utils.Global;
+import static utils.Global.pOut;
 import warrior.MemberSuccess;
 import warrior.Warrior;
 
@@ -113,7 +114,7 @@ public class Home {
      */
     public static void main(String args[]) {
 
-        System.out.println(Str.out + "Beta:W-0.5 by Author:@Chemaclass (Type 'help' for more help)");
+        pOut("Beta:W-0.5 by Author:@Chemaclass (Type 'help' for more help)");
         home = new Home();
 
         String s = "";
@@ -121,7 +122,7 @@ public class Home {
         while (!s.equals(Str.exit)) {
             try {
                 System.out.print(Str.in);
-                s = Utils.BR.readLine();
+                s = Global.BR.readLine();
                 StringTokenizer st = new StringTokenizer(s);
 
                 buffer = new String[st.countTokens()];
@@ -136,10 +137,10 @@ public class Home {
                 }
 
             } catch (IOException ex) {
-                System.out.println(Str.out + "Exception:" + ex.getMessage());
+               pOut("Exception:" + ex.getMessage());
             }
         }
-        System.out.println(Str.out + "Bye!");
+        pOut("Bye!");
     }
 
     /**
