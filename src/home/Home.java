@@ -13,6 +13,7 @@ import java.util.StringTokenizer;
 import member.Help;
 import success.Core;
 import success.Ftp;
+import utils.Utils;
 import warrior.MemberSuccess;
 import warrior.Warrior;
 
@@ -28,11 +29,6 @@ public class Home {
      * This object will contain all the values ​​that our warrior
      */
     private static MemberSuccess ms;
-
-    /**
-     * To write to console
-     */
-    private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
     /**
      * All values collections of members
@@ -126,7 +122,7 @@ public class Home {
         while (!s.equals(Str.exit)) {
             try {
                 System.out.print(Str.in);
-                s = br.readLine();
+                s = Utils.BR.readLine();
                 StringTokenizer st = new StringTokenizer(s);
 
                 buffer = new String[st.countTokens()];
@@ -175,7 +171,7 @@ public class Home {
                 break;
             }
 
-			// Check the short commands ej: 
+            // Check the short commands ej: 
             //-n(name) -p(path) -r(remove) -c(search) -s(see) -d(send) -w(write)
             String strCheck = checks(keyBuffer);
 
@@ -324,7 +320,7 @@ public class Home {
             //return Str._continue;
         }
 
-		// Check the short commands		
+        // Check the short commands		
         // -a = all
         // -n = name
         if (keyBuffer.equals(Str._n) || keyBuffer.equals(Str._a)) {
